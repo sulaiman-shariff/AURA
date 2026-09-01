@@ -1,0 +1,15 @@
+.env
+__pycache__/
+*.pyc
+
+firmware/.build/
+firmware/serial.log
+
+.playwright-mcp/
+*.png
+
+# Frontend build artefacts
+web/node_modules/
+web/dist/
+alerts.log
+profile.json

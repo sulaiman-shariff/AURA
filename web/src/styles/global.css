@@ -1,0 +1,1912 @@
+/* -----------------------------------------------------------------
+   AURA bench — design tokens
+   An instrument console on chart paper: neutral light ground, one dark
+   stimulus, ultramarine for actions, semantic colour only for verdicts.
+   ----------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  --paper: #f4f4f1;
+  --paper-2: #ebebe6;
+  --surface: #ffffff;
+  --ink: #16181d;
+  --ink-2: #4d525c;
+  --ink-3: #848a96;
+  --line: #e1e2e6;
+  --line-2: #c9ccd3;
+  --grid: rgba(22, 24, 29, 0.055);
+
+  --accent: #2b3ed9;
+  --accent-ink: #1f2fb0;
+  --accent-soft: #e8eafb;
+  --accent-line: #b9c0f2;
+
+  --ok: #1a7a49;
+  --ok-soft: #e2f2e8;
+  --ok-line: #a9d9bc;
+  --warn: #8f6210;
+  --warn-soft: #f9efd4;
+  --warn-line: #e8cf8a;
+  --bad: #b8382c;
+  --bad-soft: #fbe6e2;
+  --bad-line: #eeb0a7;
+
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  --radius-sm: 8px;
+  --radius: 10px;
+  --radius-lg: 16px;
+
+  --shadow-card: 0 1px 2px rgba(22, 24, 29, 0.04), 0 8px 24px -16px rgba(22, 24, 29, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+dt,
+ol,
+ul {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* -----------------------------------------------------------------
+   Shell
+   ----------------------------------------------------------------- */
+
+.app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 22px 28px 56px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.brand__mark {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.brand__sub {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-3);
+  letter-spacing: 0.01em;
+}
+
+.topbar__chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 12.5px;
+}
+
+.tgt__label {
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.chip__value {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.chip__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+
+.chip--status.is-on .chip__dot {
+  background: var(--ok);
+  box-shadow: 0 0 0 3px var(--ok-soft);
+}
+
+.chip--status.is-off .chip__dot {
+  background: var(--bad);
+  box-shadow: 0 0 0 3px var(--bad-soft);
+}
+
+.chip--status.is-off .chip__value {
+  color: var(--bad);
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 10px 14px;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-size: 13.5px;
+}
+
+.notice__close {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.notice__close:hover {
+  background: rgba(43, 62, 217, 0.1);
+}
+
+.warning {
+  margin-top: 16px;
+  padding: 10px 14px 10px 16px;
+  border-left: 3px solid var(--warn);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--warn-soft);
+  color: #5a3f08;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.warning strong {
+  font-weight: 600;
+  color: #4a3406;
+}
+
+/* -----------------------------------------------------------------
+   Layout
+   ----------------------------------------------------------------- */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 22px;
+  margin-top: 22px;
+  align-items: start;
+}
+
+.layout__main,
+.layout__rail {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.layout__rail {
+  position: sticky;
+  top: 18px;
+}
+
+/* -----------------------------------------------------------------
+   Cards
+   ----------------------------------------------------------------- */
+
+.card {
+  padding: 20px 22px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.card__head h2,
+.card__head h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.card__head h3 {
+  font-size: 16px;
+}
+
+.card__meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.card__section {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.lede {
+  max-width: 64ch;
+  margin-bottom: 16px;
+  color: var(--ink-2);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.hint {
+  margin-top: 10px;
+  color: var(--ink-3);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.hint--mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.empty {
+  padding: 18px 0 6px;
+  color: var(--ink-3);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* -----------------------------------------------------------------
+   Stage — the one place that is allowed to be loud
+   ----------------------------------------------------------------- */
+
+.card--stage {
+  padding-top: 18px;
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 340px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(rgba(22, 24, 29, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 24, 29, 0.11) 1px, transparent 1px);
+  background-size:
+    10px 10px,
+    10px 10px,
+    50px 50px,
+    50px 50px;
+  background-position: center;
+  overflow: hidden;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.stage.is-live {
+  border-color: var(--accent-line);
+  box-shadow: inset 0 0 0 1px var(--accent-line);
+}
+
+.stage__disc {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: #333333;
+  box-shadow:
+    0 0 0 1px rgba(22, 24, 29, 0.08),
+    0 18px 40px -18px rgba(22, 24, 29, 0.45);
+  user-select: none;
+}
+
+.stage__corner {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.stage__corner--right {
+  left: auto;
+  right: 14px;
+}
+
+.stage__corner-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line-2);
+}
+
+.stage.is-live .stage__corner {
+  color: var(--accent-ink);
+}
+
+.stage.is-live .stage__corner-dot {
+  background: var(--accent);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.stage__hint {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.readout {
+  display: flex;
+  gap: 28px;
+  margin: 14px 2px 0;
+}
+
+.readout__item dt {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.readout__item dd {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.readout__flag {
+  margin-left: 8px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.status-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 14px;
+  color: var(--ink-2);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.status-line__dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--line-2);
+}
+
+.status-line.is-active {
+  color: var(--ink);
+}
+
+.status-line.is-active .status-line__dot {
+  background: var(--accent);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+/* -----------------------------------------------------------------
+   Controls
+   ----------------------------------------------------------------- */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.controls__gap {
+  flex: 1 1 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field__label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.field__input {
+  height: 38px;
+  min-width: 140px;
+  padding: 0 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.field__input--short {
+  min-width: 90px;
+  width: 90px;
+}
+
+select.field__input {
+  font-family: var(--font-body);
+  padding-right: 32px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%234d525c' stroke-width='1.5' d='M2.5 4.5 6 8l3.5-3.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.field__input:hover:not(:disabled) {
+  border-color: var(--ink-3);
+}
+
+.field__input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.field__input:disabled {
+  background: var(--paper);
+  color: var(--ink-3);
+  cursor: not-allowed;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 15px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.btn--primary {
+  background: var(--accent);
+  border-color: var(--accent-ink);
+  color: #ffffff;
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: var(--accent-ink);
+}
+
+.btn--secondary {
+  background: var(--surface);
+  border-color: var(--line-2);
+  color: var(--ink);
+}
+
+.btn--secondary:hover:not(:disabled) {
+  background: var(--paper);
+  border-color: var(--ink-3);
+}
+
+.btn--danger {
+  background: var(--surface);
+  border-color: var(--bad-line);
+  color: var(--bad);
+}
+
+.btn--danger:hover:not(:disabled) {
+  background: var(--bad-soft);
+}
+
+.btn--ghost {
+  height: 32px;
+  padding: 0 12px;
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+/* -----------------------------------------------------------------
+   Pills and tags
+   ----------------------------------------------------------------- */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink-2);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pill--sm {
+  height: 22px;
+  padding: 0 8px;
+  font-size: 10.5px;
+}
+
+.pill__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+
+.pill--recording {
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+  color: var(--accent-ink);
+}
+
+.pill--recording .pill__dot {
+  background: var(--accent);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.pill--match {
+  background: var(--ok-soft);
+  border-color: var(--ok-line);
+  color: var(--ok);
+}
+
+.pill--match .pill__dot {
+  background: var(--ok);
+}
+
+.pill--no-match {
+  background: var(--bad-soft);
+  border-color: var(--bad-line);
+  color: var(--bad);
+}
+
+.pill--no-match .pill__dot {
+  background: var(--bad);
+}
+
+.pill--uncertain {
+  background: var(--warn-soft);
+  border-color: var(--warn-line);
+  color: var(--warn);
+}
+
+.pill--uncertain .pill__dot {
+  background: var(--warn);
+}
+
+.result-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.result-tag__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.result-tag--match {
+  color: var(--ok);
+}
+.result-tag--match .result-tag__dot {
+  background: var(--ok);
+}
+.result-tag--no-match {
+  color: var(--bad);
+}
+.result-tag--no-match .result-tag__dot {
+  background: var(--bad);
+}
+.result-tag--uncertain {
+  color: var(--warn);
+}
+.result-tag--uncertain .result-tag__dot {
+  background: var(--warn);
+}
+
+/* -----------------------------------------------------------------
+   Result rail
+   ----------------------------------------------------------------- */
+
+.result-hero {
+  padding: 8px 0 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.result-hero__value {
+  font-family: var(--font-mono);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.result-hero__unit {
+  margin-left: 6px;
+  font-size: 18px;
+  color: var(--ink-3);
+  letter-spacing: 0;
+}
+
+.result-hero__value--empty {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+.result-hero__value--empty .result-hero__unit {
+  margin-left: 0;
+  font-size: 16px;
+}
+
+.result-hero__caption {
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+
+.metric-group {
+  padding-top: 12px;
+}
+
+.metric-group + .metric-group {
+  margin-top: 4px;
+  border-top: 1px solid var(--line);
+}
+
+.metric-group__title {
+  margin-bottom: 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.metric {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 16px;
+  padding: 6px 0;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+
+.metric strong {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* -----------------------------------------------------------------
+   History
+   ----------------------------------------------------------------- */
+
+.table-scroll {
+  overflow-x: auto;
+  margin: 4px -6px 0;
+}
+
+.history {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.history th {
+  padding: 6px 6px 8px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.history td {
+  padding: 7px 6px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.history tr:last-child td {
+  border-bottom: 0;
+}
+
+.history tr.is-rejected td {
+  color: var(--ink-3);
+}
+
+/* -----------------------------------------------------------------
+   Selection tiles
+   ----------------------------------------------------------------- */
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px 10px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+/* The flickering surface. Kept small and square: a foveated target gives a
+   cleaner SSVEP than a large field, and only this element modulates. */
+.tile__patch {
+  width: 84px;
+  height: 84px;
+  border-radius: 8px;
+  background: #333333;
+}
+
+.tile__label {
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tile__meta {
+  display: flex;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.tile__evidence {
+  color: var(--ink-2);
+}
+
+.tile--winner {
+  border-color: var(--ok);
+  background: var(--ok-soft);
+}
+
+.tile--winner .tile__evidence {
+  color: var(--ok);
+  font-weight: 500;
+}
+
+.tile--unsure {
+  border-color: var(--warn);
+  background: var(--warn-soft);
+}
+
+/* -----------------------------------------------------------------
+   Live session — HELP and Cancel are permanent, so they read as
+   different in kind from the ordinary options, not merely selected
+   ----------------------------------------------------------------- */
+
+.tile--help .tile__label {
+  color: var(--bad);
+  letter-spacing: 0.04em;
+}
+
+.tile--help {
+  border-color: var(--bad-line);
+}
+
+.tile--cancel .tile__label {
+  color: var(--ink-2);
+}
+
+/* Only while the abortable countdown is running. The pulse is on the frame,
+   never on the flickering patch: modulating the stimulus would corrupt the
+   very measurement the countdown depends on. */
+.tile--counting {
+  animation: help-pulse 1s ease-in-out infinite;
+}
+
+@keyframes help-pulse {
+  0%,
+  100% {
+    border-color: var(--bad-line);
+  }
+  50% {
+    border-color: var(--bad);
+  }
+}
+
+.card--alarm {
+  border-color: var(--bad-line);
+}
+
+.alarm-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 14px 0 4px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--bad-line);
+  border-radius: 12px;
+  background: var(--bad-soft);
+}
+
+.alarm-banner strong {
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--bad);
+}
+
+.alarm-banner span {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+.alarm-banner .btn {
+  align-self: flex-start;
+}
+
+.alarm-banner__ok {
+  color: var(--ok);
+  font-weight: 500;
+}
+
+.alarm-banner__warn {
+  color: var(--bad);
+  font-weight: 500;
+}
+
+.transcript {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.transcript__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+
+.transcript__list {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.7;
+}
+
+/* -----------------------------------------------------------------
+   Calibration steps — a real sequence, so the numbering is earned
+   ----------------------------------------------------------------- */
+
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0;
+  display: grid;
+  gap: 0;
+}
+
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 14px;
+  padding: 10px 0;
+}
+
+.step + .step::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 12.5px;
+  width: 1px;
+  height: 18px;
+  background: var(--line-2);
+}
+
+.step__marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1.5px solid var(--line-2);
+  border-radius: 50%;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-3);
+  transition: all 150ms ease;
+}
+
+.step__body {
+  min-width: 0;
+  padding-top: 3px;
+}
+
+.step__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.step__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.step__count {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.step__detail {
+  margin-top: 1px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+
+.step__bar {
+  height: 3px;
+  margin-top: 8px;
+  border-radius: 2px;
+  background: var(--paper-2);
+  overflow: hidden;
+}
+
+.step__bar span {
+  display: block;
+  height: 100%;
+  background: var(--line-2);
+  transition: width 300ms ease;
+}
+
+.step--active .step__marker {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.step--active .step__title {
+  color: var(--ink);
+}
+
+.step--active .step__bar span {
+  background: var(--accent);
+}
+
+.step--done .step__marker {
+  border-color: var(--ok);
+  background: var(--ok);
+  color: #ffffff;
+}
+
+.step--done .step__title {
+  color: var(--ink);
+}
+
+.step--done .step__bar span {
+  background: var(--ok);
+}
+
+.step--failed .step__marker {
+  border-color: var(--bad);
+  background: var(--bad);
+  color: #ffffff;
+}
+
+/* Summary */
+
+.summary {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.summary__overall {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 6px 0 14px;
+}
+
+.summary__big {
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.summary__caption {
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+.summary__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.summary__block {
+  padding: 10px 14px 6px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+
+.summary__block-title {
+  margin-bottom: 4px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.summary__block .metric {
+  padding: 5px 0;
+  font-size: 13px;
+}
+
+/* -----------------------------------------------------------------
+   Motion
+   ----------------------------------------------------------------- */
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* -----------------------------------------------------------------
+   Responsive
+   ----------------------------------------------------------------- */
+
+@media (max-width: 1040px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .layout__rail {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .app {
+    padding: 16px 16px 40px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .topbar__chips {
+    justify-content: flex-start;
+  }
+
+  .stage {
+    height: 280px;
+  }
+
+  .stage__disc {
+    width: 160px;
+    height: 160px;
+  }
+
+  .readout {
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+
+  .controls .field,
+  .controls .field__input,
+  .controls .btn {
+    width: 100%;
+  }
+
+  .controls__gap {
+    display: none;
+  }
+
+  .summary__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -----------------------------------------------------------------
+   Scene view — tags pinned over a frozen frame
+   ----------------------------------------------------------------- */
+
+.scene-view {
+  position: relative;
+  margin-top: 16px;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper-2);
+  overflow: hidden;
+}
+
+.scene-view__video,
+.scene-view__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* contain, not cover: cover crops the frame, and the detector's boxes are
+     fractions of the UNCROPPED frame. Cropping silently shifted every box
+     off its object, worsening as the camera panned. */
+  object-fit: contain;
+}
+
+/* Exactly the rectangle the letterboxed video occupies. */
+.scene-overlay {
+  position: absolute;
+  pointer-events: none;
+}
+
+.scene-view__empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  text-align: center;
+  color: var(--ink-3);
+  font-size: 13px;
+}
+
+/* The box outline shows what was detected; the small patch beside it is the
+   only thing that modulates. Covering the object would hide the very thing
+   the user is trying to choose. */
+.scene-tag {
+  position: absolute;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px rgba(22, 24, 29, 0.5);
+  pointer-events: none;
+}
+
+.scene-tag__patch {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  background: #333333;
+}
+
+.scene-tag__label {
+  position: absolute;
+  top: -6px;
+  left: 44px;
+  display: flex;
+  flex-direction: column;
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: rgba(22, 24, 29, 0.82);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.scene-tag__hz,
+.scene-tag__evidence {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 400;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
+.scene-tag--winner {
+  border-color: var(--ok);
+  box-shadow: 0 0 0 2px var(--ok);
+}
+
+.scene-tag--winner .scene-tag__label {
+  background: var(--ok);
+}
+
+.scene-tag--unsure {
+  border-color: var(--warn);
+}
+
+/* HELP and Cancel are always present, so they sit apart from whatever the
+   current stage happens to be showing. */
+.tiles--fixed {
+  grid-template-columns: repeat(2, minmax(0, 160px));
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
+}
+
+.pill--ok {
+  border-color: var(--ok-line);
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+
+.pill--warn {
+  border-color: var(--warn-line);
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+/* -----------------------------------------------------------------
+   Tabs — the live session gets a screen of its own
+   ----------------------------------------------------------------- */
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  margin-top: 18px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 16px 12px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  color: var(--ink-3);
+  transition: color 120ms ease, border-color 120ms ease;
+}
+
+.tab:hover:not(:disabled) {
+  color: var(--ink);
+}
+
+.tab:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tab.is-active {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+.tab__label {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.tab__detail {
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+
+/* On the live tab the video is the point, so give it the width. */
+.layout--wide {
+  grid-template-columns: minmax(0, 1fr) 300px;
+}
+
+/* Below ~1100px the rail stops being worth its width; stack it under. */
+@media (max-width: 1100px) {
+  .layout--wide {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .layout--wide .layout__rail {
+    position: static;
+  }
+}
+
+.card--live {
+  padding-bottom: 18px;
+}
+
+.card__head-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* -----------------------------------------------------------------
+   Live scene view — a rangefinder, not a detection demo
+
+   Everything here is drawn over arbitrary camera imagery, so each element
+   carries its own contrast: a light mark with a dark halo reads on a white
+   wall and a dark room alike.
+   ----------------------------------------------------------------- */
+
+.scene-view--large {
+  aspect-ratio: 16 / 9;
+  margin-top: 14px;
+  background: #0d0f13;
+  min-height: 420px;
+}
+
+/* --- object marker: corners only, so the object stays visible ---------- */
+
+.bracket {
+  position: absolute;
+  pointer-events: none;
+  transition: left 90ms linear, top 90ms linear, width 90ms linear, height 90ms linear;
+  --edge: rgba(255, 255, 255, 0.9);
+  --halo: rgba(10, 12, 16, 0.55);
+}
+
+.bracket--muted {
+  --edge: rgba(255, 255, 255, 0.42);
+}
+
+.bracket--enriched {
+  --edge: #8fa0ff;
+}
+
+.bracket--winner {
+  --edge: #46d98a;
+}
+
+.bracket--unsure {
+  --edge: #f0c674;
+}
+
+.bracket__c {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--edge);
+  filter: drop-shadow(0 0 1px var(--halo));
+}
+
+.bracket__c--tl { top: 0; left: 0; border-right: 0; border-bottom: 0; border-radius: 3px 0 0 0; }
+.bracket__c--tr { top: 0; right: 0; border-left: 0; border-bottom: 0; border-radius: 0 3px 0 0; }
+.bracket__c--bl { bottom: 0; left: 0; border-right: 0; border-top: 0; border-radius: 0 0 0 3px; }
+.bracket__c--br { bottom: 0; right: 0; border-left: 0; border-top: 0; border-radius: 0 0 3px 0; }
+
+/* --- the stimulus itself ----------------------------------------------- */
+
+.reticle-wrap {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  transition: left 90ms linear, top 90ms linear;
+  pointer-events: none;
+}
+
+/*
+ * The flickering square.
+ *
+ * `background` is written every frame by the animator, so nothing else may
+ * use it: the ring is a border and the halo is a shadow, both of which
+ * survive. The field stays a flat, uniform luminance — a gradient or inset
+ * shadow here would mean different parts of the patch modulating to
+ * different depths, which is a worse stimulus however much better it looks.
+ */
+.reticle {
+  width: 54px;
+  height: 54px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 0 0 1px rgba(10, 12, 16, 0.7),
+    0 2px 10px rgba(10, 12, 16, 0.45);
+  background: #333333;
+}
+
+.reticle--winner { border-color: #46d98a; box-shadow: 0 0 0 1px rgba(10,12,16,.7), 0 0 0 4px rgba(70, 217, 138, 0.28); }
+.reticle--unsure { border-color: #f0c674; }
+
+/* --- label chip: displaced to avoid collisions, tethered by a hairline -- */
+
+.leader {
+  position: absolute;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 2px rgba(10, 12, 16, 0.9);
+  pointer-events: none;
+}
+
+.tgt {
+  position: absolute;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  height: 34px;
+  padding: 0 11px;
+  border-radius: 8px;
+  background: rgba(11, 13, 17, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: left 90ms linear, top 90ms linear, background 150ms ease;
+  line-height: 32px;
+}
+
+.tgt__label {
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+.tgt__hz {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.62);
+  font-variant-numeric: tabular-nums;
+}
+
+.tgt__hz i {
+  font-style: normal;
+  margin-left: 2px;
+  font-size: 9.5px;
+  opacity: 0.75;
+}
+
+.tgt__db {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  font-variant-numeric: tabular-nums;
+}
+
+.tgt--winner { background: #1a7a49; }
+.tgt--winner .tgt__hz,
+.tgt--winner .tgt__db { color: rgba(255, 255, 255, 0.82); }
+
+.tgt--unsure { background: #8f6210; }
+
+/* Contributed by Gemini: real, but not tracked frame to frame. */
+.tgt--enriched { background: rgba(31, 47, 176, 0.88); }
+
+.tgt--muted {
+  background: rgba(13, 15, 19, 0.6);
+}
+
+.tgt--muted .tgt__label {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* --- notice: the one message that must not be missed -------------------- */
+
+/*
+ * Centred and large, because its whole job is to distinguish "the session
+ * cancelled" from "the session did nothing". It sits above the tags but
+ * takes no pointer events -- nothing here is clickable.
+ */
+.notice {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  padding: 18px 38px;
+  border-radius: 14px;
+  background: rgba(11, 13, 17, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  pointer-events: none;
+}
+
+.stage-shell.is-presenting .notice {
+  font-size: 40px;
+  padding: 26px 56px;
+}
+
+/* --- session readout: top-left, sized to its content -------------------- */
+
+.readout {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100% - 24px);
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(13, 15, 19, 0.86);
+  color: #ffffff;
+  pointer-events: none;
+}
+
+.readout__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  flex: none;
+}
+
+.readout__dot.is-settled {
+  background: #46d98a;
+  box-shadow: 0 0 0 3px rgba(70, 217, 138, 0.22);
+}
+
+.readout__stage {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.readout__detail {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.66);
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bracket,
+  .reticle-wrap,
+  .tgt {
+    transition: none;
+  }
+}
+
+/* -----------------------------------------------------------------
+   Presentation mode — the room, with targets on it, and nothing else
+   ----------------------------------------------------------------- */
+
+.stage-shell {
+  position: relative;
+}
+
+.stage-shell.is-presenting {
+  background: #0d0f13;
+  display: grid;
+  place-items: stretch;
+}
+
+.stage-shell.is-presenting .scene-view {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  max-height: 100vh;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
+}
+
+/* Everything grows: read from the back of a room, and a bigger stimulus is
+   a stronger one. */
+.stage-shell.is-presenting .reticle {
+  width: 76px;
+  height: 76px;
+  border-radius: 14px;
+}
+
+.stage-shell.is-presenting .tgt {
+  height: 42px;
+  line-height: 42px;
+  padding: 0 15px;
+  border-radius: 10px;
+}
+
+.stage-shell.is-presenting .tgt__label { font-size: 17px; }
+.stage-shell.is-presenting .tgt__hz,
+.stage-shell.is-presenting .tgt__db { font-size: 13px; }
+
+.stage-shell.is-presenting .readout {
+  top: 24px;
+  left: 24px;
+  padding: 12px 20px;
+}
+
+.stage-shell.is-presenting .readout__stage { font-size: 18px; }
+.stage-shell.is-presenting .readout__detail { font-size: 15px; }
+
+/* --- HELP and Cancel, in the corners of the field ---------------------- */
+
+.corner {
+  position: absolute;
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(13, 15, 19, 0.86);
+  pointer-events: none;
+}
+
+.corner--left { left: 14px; }
+.corner--right { right: 14px; flex-direction: row-reverse; }
+
+.corner__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.corner--right .corner__text { align-items: flex-end; }
+
+.corner__label {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.corner--cancel .corner__label {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.corner__hz {
+  display: flex;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  font-variant-numeric: tabular-nums;
+}
+
+.corner__hz i { font-style: normal; opacity: 0.7; margin-left: 2px; }
+.corner__hz em { font-style: normal; color: rgba(255, 255, 255, 0.45); }
+
+/* HELP is the one control that must be findable without looking for it. */
+.corner--help {
+  background: rgba(120, 26, 20, 0.9);
+  box-shadow: 0 0 0 1px rgba(255, 130, 118, 0.5);
+}
+
+.corner--help .corner__label { color: #ffd9d4; }
+
+.corner--winner { box-shadow: 0 0 0 2px #46d98a; }
+
+.stage-shell.is-presenting .corner {
+  bottom: 32px;
+  padding: 14px 20px;
+  gap: 16px;
+}
+
+.stage-shell.is-presenting .corner--left { left: 32px; }
+.stage-shell.is-presenting .corner--right { right: 32px; }
+.stage-shell.is-presenting .corner__label { font-size: 18px; }
+
+/* --- intent menu, floated over the view -------------------------------- */
+
+.intent-bar {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: calc(100% - 320px);
+  pointer-events: none;
+}
+
+.intent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(13, 15, 19, 0.88);
+}
+
+.intent__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  max-width: 160px;
+  text-align: center;
+}
+
+.intent__hz {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.intent__hz i { font-style: normal; margin-left: 2px; opacity: 0.7; }
+.intent__hz em { font-style: normal; margin-left: 8px; color: rgba(255, 255, 255, 0.42); }
+
+.intent--winner { box-shadow: 0 0 0 2px #46d98a; }
+
+.stage-shell.is-presenting .intent-bar { bottom: 32px; gap: 22px; }
+.stage-shell.is-presenting .intent__label { font-size: 18px; max-width: 220px; }
+
+/* --- exit affordance ---------------------------------------------------- */
+
+.stage-exit {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(13, 15, 19, 0.7);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.scene-view:hover .stage-exit,
+.stage-exit:focus-visible {
+  opacity: 1;
+}
+
+.stage-shell.is-presenting .stage-exit { top: 24px; right: 24px; }

@@ -1,0 +1,27 @@
+{
+  "frequencies": [
+    15.0,
+    17.0,
+    19.0
+  ],
+  "thresholds": {
+    "15": {
+      "evidence_threshold": 2.8107,
+      "margin_threshold": 0.4451
+    },
+    "17": {
+      "evidence_threshold": 2.0977,
+      "margin_threshold": 0.25
+    },
+    "19": {
+      "evidence_threshold": 2.4912,
+      "margin_threshold": 0.25
+    }
+  },
+  "baseline_db": {
+    "15": 3.8465,
+    "17": 0.7545,
+    "19": -0.628
+  },
+  "calibrated_at": 1787939999.8470519
+}
