@@ -1,0 +1,31 @@
+[build]
+  base = "web"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Gemini-backed endpoints are not exposed on the public deploy. The client treats
+# a non-OK response as "no result" and falls back to on-device detection.
+# Rules match top-down, so these must stay above the /api/* proxy.
+[[redirects]]
+  from = "/api/scene"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/api/intents"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# The UI calls /api/*, which is served by the local Flask server exposed through
+# the ngrok tunnel (see firmware/tunnel.py). Proxy it so the UI stays same-origin.
+[[redirects]]
+  from = "/api/*"
+  to = "https://creaturely-hyperbatically-nancy.ngrok-free.dev/api/:splat"
+  status = 200
+  force = true
+  headers = {ngrok-skip-browser-warning = "true"}
